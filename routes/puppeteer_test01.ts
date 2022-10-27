@@ -5,13 +5,14 @@ const router = express.Router();
 
 router.get("/puptest", async (req: Request, res: Response) => {
   console.log(process.env.MORI, "これでheroku環境か判別できる？");
-  // const LAUNCH_OPTION = process.env.ENV
-  //   ? { args: ["--no-sandbox", "--disable-setuid-sandbox"] }
-  //   : { headless: false };
+  const LAUNCH_OPTION = process.env.MORI
+    ? { headless: false }
+    : { args: ["--no-sandbox", "--disable-setuid-sandbox"] };
+
   let searchResults;
   try {
-    // const browser = await puppeteer.launch(LAUNCH_OPTION);
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch(LAUNCH_OPTION);
+    // const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     // Googleページを開く
     await page.goto("https://www.google.com/");
