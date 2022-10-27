@@ -1,5 +1,11 @@
 const { join } = require("path");
 const os = require("os");
+
+console.log(
+  join(os.homedir(), ".cache", "puppeteer"),
+  'join(os.homedir(), ".cache", "puppeteer")'
+);
+
 /**
  * @type {import("puppeteer").Configuration}
  */
