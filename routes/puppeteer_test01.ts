@@ -4,16 +4,14 @@ import puppeteer from "puppeteer";
 const router = express.Router();
 
 router.get("/puptest", async (req: Request, res: Response) => {
-  console.log(process.env.DYNO, "これでheroku環境か判別できる？");
-  const LAUNCH_OPTION = process.env.DYNO
-    ? { args: ["--no-sandbox", "--disable-setuid-sandbox"] }
-    : { headless: false };
+  console.log(process.env.MORI, "これでheroku環境か判別できる？");
+  // const LAUNCH_OPTION = process.env.ENV
+  //   ? { args: ["--no-sandbox", "--disable-setuid-sandbox"] }
+  //   : { headless: false };
   let searchResults;
   try {
     // const browser = await puppeteer.launch(LAUNCH_OPTION);
-    const browser = await puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
+    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     // Googleページを開く
     await page.goto("https://www.google.com/");
@@ -36,11 +34,11 @@ router.get("/puptest", async (req: Request, res: Response) => {
       )
     );
     console.log(searchResults);
+    await browser.close();
   } catch (error) {
     console.error(error);
   }
 
-  // await browser.close();
   res.status(200).send({
     message: searchResults,
   });
