@@ -8,7 +8,7 @@ router.get("/csvtest", async (req: Request, res: Response) => {
   // 1. CSVをダウンロード
   // 2. ダウンロードしたCSVを解析
   res.status(200).send({
-    message: "download_csv_test01",
+    message: "download_csv_test",
   });
 });
 
