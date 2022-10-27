@@ -4,7 +4,11 @@ import puppeteer from "puppeteer";
 const router = express.Router();
 
 router.get("/puptest", async (req: Request, res: Response) => {
-  console.log(process.env.MORI, "これでheroku環境か判別できる？");
+  console.log(
+    process.env.MORI,
+    process.env.ENV,
+    "これでheroku環境か判別できる？"
+  );
   const LAUNCH_OPTION = process.env.MORI
     ? { headless: false }
     : { args: ["--no-sandbox", "--disable-setuid-sandbox"] };
