@@ -9,9 +9,10 @@ router.get("/puptest", async (req: Request, res: Response) => {
     process.env.ENV,
     "これでheroku環境か判別できる？"
   );
-  const LAUNCH_OPTION = process.env.MORI
-    ? { headless: false }
-    : { args: ["--no-sandbox", "--disable-setuid-sandbox"] };
+  const LAUNCH_OPTION =
+    process.env.ENV === "LOCAL"
+      ? { headless: false }
+      : { args: ["--no-sandbox", "--disable-setuid-sandbox"] };
 
   let searchResults;
   try {
