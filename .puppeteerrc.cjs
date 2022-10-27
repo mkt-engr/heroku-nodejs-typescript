@@ -5,6 +5,10 @@ console.log(
   join(os.homedir(), ".cache", "puppeteer"),
   'join(os.homedir(), ".cache", "puppeteer")'
 );
+console.log(
+  join(__dirname, ".cache", "puppeteer"),
+  'join(__dirname, ".cache", "puppeteer"),'
+);
 
 /**
  * @type {import("puppeteer").Configuration}
