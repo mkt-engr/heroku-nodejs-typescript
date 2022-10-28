@@ -57,9 +57,15 @@ router.get("/csvtest", async (req: Request, res: Response) => {
   //     }
   //   });
   //要素クリック
-  await element!.click();
+  if (element) {
+    console.error("クリックできる要素があるよ〜〜〜〜");
+    await element.click();
+  } else {
+    console.error("クリックできる要素がないよ〜〜〜〜");
+  }
+
   //ブラウザ閉じる
-  await browser.close();
+  //   await browser.close();
 
   // 2. ダウンロードしたCSVを解析
   // 3. DBにデータ追加したい
