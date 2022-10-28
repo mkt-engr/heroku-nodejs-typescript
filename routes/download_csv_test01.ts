@@ -29,37 +29,37 @@ router.get("/csvtest", async (req: Request, res: Response) => {
 
   //TODO:ファイル名を決めるにはレスポンスをインターセプトしてファイル名を変更する必要がある。
 
-  cdpSession.send("Fetch.enable", {
-    patterns: [{ urlPattern: "*", requestStage: "Response" }],
-  });
-  cdpSession.on("Fetch.requestPaused", async (requestEvent) => {
-    const resHeaders = (requestEvent.responseHeaders || []).filter(
-      (v: { name: string }) => v.name !== "content-disposition"
-    );
-    const { requestId } = requestEvent;
-    if (requestEvent.responseStatusCode == 200) {
-      // inject Content-Disposition header
-      resHeaders.push({
-        name: "content-disposition",
-        value: `attachment; filename="makito.csv"`,
-      });
-      const response = await cdpSession.send("Fetch.getResponseBody", {
-        requestId: requestId,
-      });
-      await cdpSession.send("Fetch.fulfillRequest", {
-        requestId,
-        responseCode: 200,
-        responseHeaders: resHeaders,
-        body: response.body,
-      });
-      //ブラウザ閉じる
-      //   await browser.close();
-    } else {
-      await cdpSession.send("Fetch.continueRequest", { requestId });
-    }
-  });
+  //   cdpSession.send("Fetch.enable", {
+  //     patterns: [{ urlPattern: "*", requestStage: "Response" }],
+  //   });
+  //   cdpSession.on("Fetch.requestPaused", async (requestEvent) => {
+  //     const resHeaders = (requestEvent.responseHeaders || []).filter(
+  //       (v: { name: string }) => v.name !== "content-disposition"
+  //     );
+  //     const { requestId } = requestEvent;
+  //     if (requestEvent.responseStatusCode == 200) {
+  //       // inject Content-Disposition header
+  //       resHeaders.push({
+  //         name: "content-disposition",
+  //         value: `attachment; filename="makito.csv"`,
+  //       });
+  //       const response = await cdpSession.send("Fetch.getResponseBody", {
+  //         requestId: requestId,
+  //       });
+  //       await cdpSession.send("Fetch.fulfillRequest", {
+  //         requestId,
+  //         responseCode: 200,
+  //         responseHeaders: resHeaders,
+  //         body: response.body,
+  //       });
+  //     } else {
+  //       await cdpSession.send("Fetch.continueRequest", { requestId });
+  //     }
+  //   });
   //要素クリック
   await element!.click();
+  //ブラウザ閉じる
+  await browser.close();
 
   // 2. ダウンロードしたCSVを解析
   // 3. DBにデータ追加したい
