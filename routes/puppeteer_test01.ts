@@ -17,7 +17,6 @@ router.get("/puptest", async (req: Request, res: Response) => {
   let searchResults;
   try {
     const browser = await puppeteer.launch(LAUNCH_OPTION);
-    // const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     // Googleページを開く
     await page.goto("https://www.google.com/");
