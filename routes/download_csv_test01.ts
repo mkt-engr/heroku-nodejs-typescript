@@ -52,15 +52,14 @@ router.get("/csvtest", async (req: Request, res: Response) => {
         responseHeaders: resHeaders,
         body: response.body,
       });
+      //ブラウザ閉じる
+      //   await browser.close();
     } else {
       await cdpSession.send("Fetch.continueRequest", { requestId });
     }
   });
   //要素クリック
   await element!.click();
-
-  //ブラウザ閉じる
-  await browser.close();
 
   // 2. ダウンロードしたCSVを解析
   // 3. DBにデータ追加したい
