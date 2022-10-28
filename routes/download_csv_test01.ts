@@ -41,7 +41,7 @@ router.get("/csvtest", async (req: Request, res: Response) => {
       // inject Content-Disposition header
       resHeaders.push({
         name: "content-disposition",
-        value: `attachment; filename="森真輝人.csv"`,
+        value: `attachment; filename="makito.csv"`,
       });
       const response = await cdpSession.send("Fetch.getResponseBody", {
         requestId: requestId,
