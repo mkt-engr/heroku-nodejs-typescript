@@ -10,7 +10,7 @@ router.get("/pdftest", async (req: Request, res: Response) => {
       : { args: ["--no-sandbox", "--disable-setuid-sandbox"] };
   const browser = await puppeteer.launch(LAUNCH_OPTION);
   const page = await browser.newPage();
-  await page.goto("https://example.com");
+  await page.goto("https://example.com", { waitUntil: "networkidle2" });
   await page.screenshot({ path: `${__dirname}example.png` });
   await page.pdf({ path: `${__dirname}/example.png` });
   await browser.close();
