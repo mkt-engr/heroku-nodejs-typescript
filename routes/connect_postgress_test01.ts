@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { Client } from "pg";
+import { Client, Pool } from "pg";
 const router = express.Router();
 
 router.get("/connectdbtest", async (req: Request, res: Response) => {
@@ -15,20 +15,28 @@ router.get("/connectdbtest", async (req: Request, res: Response) => {
     console.error(error);
   }
   let a;
+
+  const b = await client.query("SELECT * FROM articles;");
+  const c = b.rows;
+  console.log({ c });
   client.query("SELECT * FROM articles;", (err, response) => {
+    //   client.query("SELECT NOW();", (err, response) => {
     if (err) throw err;
-    a = response.rows[0].title;
+    // a = response.rows[0].title;ß
+    a = response.rows[0];
     console.log(a);
     for (let row of response.rows) {
       //   console.log(JSON.stringify(row));
     }
-
+    res.status(200).json({
+      message: a,
+    });
     client.end();
   });
 
-  res.status(200).send({
-    message: a,
-  });
+  //   res.status(200).json({
+  //     message: a,
+  //   });
 });
 
 export { router as connectPostgressTest01Router };
