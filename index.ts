@@ -5,6 +5,7 @@ import path from "path";
 import { puppeteerTest01Router } from "./routes/puppeteer_test01";
 import { downloadCsvTest01Router } from "./routes/download_csv_test01";
 import { downloadPdfTest01Router } from "./routes/download_pdf_test01";
+import { connectPostgressTest01Router } from "./routes/connect_postgress_test01";
 
 const PORT = process.env.PORT || 5001;
 const app = express();
@@ -23,3 +24,4 @@ app
 app.use(puppeteerTest01Router);
 app.use(downloadCsvTest01Router);
 app.use(downloadPdfTest01Router);
+app.use(connectPostgressTest01Router);
